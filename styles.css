@@ -1,26 +1,60 @@
+/* ============================================================
+   Design: "the route" — a hand-kept travel-journal itinerary.
+   One structural idea carries the whole page: a single vertical
+   route line runs down the spine of the trip; each day is a stop
+   along it, marked by a small tile-coloured knot. Geography reads
+   as colour (azulejo blue = Lisbon, ochre = Algarve, wine = Porto)
+   so the traveller can scan the spine and see the shape of the
+   trip before reading a word.
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Heebo:wght@400;500;600;700&display=swap");
+
 :root {
-  --background: #f7f5f2;
-  --surface: #ffffff;
-  --foreground: #1f2430;
-  --muted: #6b7280;
-  --border: #e6e2db;
-  --accent: #1d7a6f;
-  --suggestion: #a855f7;
-  --suggestion-bg: #f4e9fe;
-  --stay-bg: #fdf1de;
-  --stay: #d97706;
+  --paper: #f6f1e6;
+  --panel: #fffdf7;
+  --ink: #21283a;
+  --ink-soft: #5b6478;
+  --hairline: #e4dcc8;
+
+  --azulejo: #1f5c86;
+  --azulejo-deep: #163f5c;
+  --azulejo-pale: #dfeaf1;
+
+  --ochre: #c97a2b;
+  --ochre-pale: #f6e6d3;
+
+  --wine: #7c2836;
+  --wine-pale: #f3dfe1;
+
+  --general: #3c6e4f;
+  --general-pale: #dfeee2;
+
+  --gold: #b8863b;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #14161c;
-    --surface: #1d2029;
-    --foreground: #f2f1ee;
-    --muted: #9ca3af;
-    --border: #2c303b;
-    --accent: #3fbfae;
-    --suggestion-bg: #2c1f3f;
-    --stay-bg: #3a2a10;
+    --paper: #14171f;
+    --panel: #1b1f2a;
+    --ink: #ece7d8;
+    --ink-soft: #a2a8ba;
+    --hairline: #2c3140;
+
+    --azulejo: #5b9dc4;
+    --azulejo-deep: #a8d2e8;
+    --azulejo-pale: #1d3040;
+
+    --ochre: #e2a15c;
+    --ochre-pale: #33291a;
+
+    --wine: #d98b96;
+    --wine-pale: #34202a;
+
+    --general: #7fbd93;
+    --general-pale: #1c2c21;
+
+    --gold: #d9b06a;
   }
 }
 
@@ -30,102 +64,386 @@
 
 html {
   direction: rtl;
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
-  background: var(--background);
-  color: var(--foreground);
-  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
-  padding-bottom: 2rem;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Heebo", "Segoe UI", Arial, sans-serif;
+  padding-bottom: 3rem;
 }
 
-header {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  padding: 1.25rem 1rem;
-  text-align: center;
+a {
+  color: inherit;
 }
 
-header h1 {
-  margin: 0 0 0.25rem;
-  font-size: 1.25rem;
+/* ---------------------------------------------------------------
+   Hero — one bold moment. Everything after this is quiet.
+   --------------------------------------------------------------- */
+
+.hero {
+  background:
+    radial-gradient(120% 140% at 15% 0%, rgba(255, 255, 255, 0.08), transparent 55%),
+    linear-gradient(160deg, var(--azulejo) 0%, var(--azulejo-deep) 100%);
+  color: #f4f8fb;
+  padding: 2.6rem 1.25rem 2.1rem;
+  position: relative;
+  overflow: hidden;
 }
 
-header p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.9rem;
+.hero-compass {
+  position: absolute;
+  inset-inline-end: -3.5rem;
+  top: -3.5rem;
+  width: 12rem;
+  height: 12rem;
+  opacity: 0.16;
+  color: var(--gold);
 }
 
-main {
+.hero-inner {
+  position: relative;
+  z-index: 1;
   max-width: 560px;
   margin: 0 auto;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
 }
 
-.day {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 1rem;
-  padding: 1rem;
+.hero-eyebrow {
+  font-family: "Frank Ruhl Libre", serif;
+  font-size: 0.95rem;
+  color: var(--gold);
+  margin: 0 0 0.35rem;
+}
+
+.hero h1 {
+  font-family: "Frank Ruhl Libre", serif;
+  font-weight: 900;
+  font-size: 2rem;
+  line-height: 1.15;
+  margin: 0 0 0.5rem;
+}
+
+.hero-dates {
+  font-size: 1rem;
+  color: rgba(244, 248, 251, 0.85);
+  margin: 0 0 1.5rem;
+}
+
+.search-bar {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 0.9rem;
+  padding: 0.7rem 0.95rem;
+  backdrop-filter: blur(2px);
 }
 
-.day-date {
+.search-bar input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #fff;
+  font-size: 0.95rem;
+  font-family: inherit;
+  min-width: 0;
+}
+
+.search-bar input::placeholder {
+  color: rgba(244, 248, 251, 0.6);
+}
+
+.search-clear {
+  border: none;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  border-radius: 999px;
+  width: 1.6rem;
+  height: 1.6rem;
+  line-height: 1;
+  font-size: 0.85rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 1.1rem;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: rgba(244, 248, 251, 0.85);
+}
+
+.legend-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-lisbon .legend-dot { background: var(--azulejo-pale); box-shadow: inset 0 0 0 2px #fff; }
+.legend-algarve .legend-dot { background: var(--ochre); }
+.legend-porto .legend-dot { background: var(--wine-pale); box-shadow: inset 0 0 0 2px var(--wine); }
+
+.tag-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tag-chip {
+  font-family: inherit;
+  font-size: 0.8rem;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
+  cursor: pointer;
+}
+
+.tag-chip.is-active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--azulejo-deep);
+  font-weight: 600;
+}
+
+.no-results {
+  max-width: 560px;
+  margin: 1.5rem auto 0;
+  padding: 0 1.25rem;
+  color: var(--ink-soft);
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+/* ---------------------------------------------------------------
+   The route — a single spine down the right edge (RTL), each day
+   a knot on the line. No repeating card chrome; the spine and the
+   colour of each knot carry the structure instead.
+   --------------------------------------------------------------- */
+
+.route {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 0;
+  position: relative;
+}
+
+.route::before {
+  content: "";
+  position: absolute;
+  top: 0.5rem;
+  bottom: 2.5rem;
+  inset-inline-end: calc(1.25rem + 0.5rem);
+  width: 2px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--hairline) 0,
+    var(--hairline) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+}
+
+.entry {
+  position: relative;
+  padding-inline-end: 2.35rem;
+  padding-bottom: 2.1rem;
+}
+
+.entry:last-of-type {
+  padding-bottom: 0.5rem;
+}
+
+.entry-knot {
+  position: absolute;
+  inset-inline-end: 0;
+  top: 0.2rem;
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 50%;
+  background: var(--panel);
+  border: 3px solid var(--ink-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+}
+
+.entry[data-city="lisbon"] .entry-knot { border-color: var(--azulejo); }
+.entry[data-city="algarve"] .entry-knot { border-color: var(--ochre); }
+.entry[data-city="porto"] .entry-knot { border-color: var(--wine); }
+.entry[data-city="general"] .entry-knot { border-color: var(--general); }
+
+.entry-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 0.7rem;
+}
+
+.entry-icon {
+  font-size: 1.15rem;
+}
+
+.entry-date {
+  font-family: "Frank Ruhl Libre", serif;
   font-weight: 700;
+  font-size: 1.15rem;
 }
 
-.day-weekday {
-  color: var(--muted);
-  font-size: 0.9rem;
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.7rem;
+}
+
+.tag {
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  background: var(--panel);
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+}
+
+.entry-weekday {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
 }
 
 .plan {
   list-style: none;
-  margin: 0;
+  margin: 0 0 0.75rem;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.55rem;
 }
 
 .plan li {
-  display: flex;
-  gap: 0.5rem;
-  font-size: 0.95rem;
+  font-size: 0.97rem;
+  line-height: 1.45;
 }
 
 .plan .note {
   display: block;
-  font-size: 0.8rem;
-  color: var(--muted);
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  margin-top: 0.15rem;
+}
+
+/* ---- tips: a postscript, tucked at an angle like a hand note ---- */
+
+.tips-panel {
+  border-inline-start: 3px solid var(--gold);
+  padding: 0.55rem 0.9rem;
+  margin: 0 0 0.75rem;
+  background: linear-gradient(90deg, var(--ochre-pale), transparent 70%);
+  border-radius: 0 0.4rem 0.4rem 0;
+}
+
+.tips-title {
+  font-family: "Frank Ruhl Libre", serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 0.25rem;
+}
+
+.tips-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.tips-list li {
+  font-size: 0.87rem;
+  color: var(--ink-soft);
 }
 
 .suggestion {
-  font-size: 0.85rem;
-  color: var(--suggestion);
-  background: var(--suggestion-bg);
-  padding: 0.4rem 0.65rem;
-  border-radius: 0.6rem;
+  font-size: 0.87rem;
+  color: var(--wine);
+  border: 1px dashed var(--wine);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  margin: 0 0 0.75rem;
+  background: var(--wine-pale);
 }
 
+/* ---- stay: a small ticket stub ---- */
+
 .stay {
-  font-size: 0.9rem;
-  color: var(--stay);
-  background: var(--stay-bg);
-  padding: 0.5rem 0.65rem;
-  border-radius: 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  background: var(--panel);
+}
+
+.stay a {
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ink-soft);
+}
+
+.stay a:hover {
+  border-color: var(--ink);
 }
 
 footer {
   text-align: center;
-  color: var(--muted);
+  color: var(--ink-soft);
   font-size: 0.8rem;
-  padding: 1rem;
+  padding: 2rem 1.25rem 0;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* ---------------------------------------------------------------
+   Small phones
+   --------------------------------------------------------------- */
+
+@media (max-width: 380px) {
+  .hero h1 {
+    font-size: 1.65rem;
+  }
+
+  .entry {
+    padding-inline-end: 2rem;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Reduced motion
+   --------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }

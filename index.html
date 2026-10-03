@@ -8,133 +8,305 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header>
-    <h1>🇵🇹 Portugal Family Trip 2026</h1>
-    <p>20/09/2026 – 01/10/2026</p>
+  <header class="hero">
+    <svg class="hero-compass" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+      <circle cx="50" cy="50" r="42" />
+      <circle cx="50" cy="50" r="2" fill="currentColor" stroke="none" />
+      <path d="M50 8 L54 46 L50 50 L46 46 Z" fill="currentColor" stroke="none" />
+      <path d="M50 92 L54 54 L50 50 L46 54 Z" fill="currentColor" stroke="none" opacity="0.5" />
+      <line x1="8" y1="50" x2="92" y2="50" />
+      <line x1="50" y1="8" x2="50" y2="92" />
+      <line x1="20" y1="20" x2="80" y2="80" opacity="0.5" />
+      <line x1="80" y1="20" x2="20" y2="80" opacity="0.5" />
+    </svg>
+    <div class="hero-inner">
+      <p class="hero-eyebrow">✦ מסע משפחתי ✦</p>
+      <h1>Portugal Family Trip 2026</h1>
+      <p class="hero-dates">20/09/2026 – 01/10/2026</p>
+
+      <div class="search-bar">
+        <span aria-hidden="true">🔍</span>
+        <input id="search" type="search" placeholder="חיפוש — עיר, פעילות, לינה…" aria-label="חיפוש בלוז" autocomplete="off" />
+        <button id="searchClear" class="search-clear" type="button" hidden aria-label="נקה חיפוש">✕</button>
+      </div>
+
+      <div class="legend" aria-hidden="true">
+        <span class="legend-item legend-lisbon"><span class="legend-dot"></span>ליסבון</span>
+        <span class="legend-item legend-algarve"><span class="legend-dot"></span>אלגרבה</span>
+        <span class="legend-item legend-porto"><span class="legend-dot"></span>פורטו</span>
+      </div>
+
+      <div class="tag-filters" id="tagFilters">
+        <button class="tag-chip" type="button" data-tag="נסיעה">🚗 נסיעה</button>
+        <button class="tag-chip" type="button" data-tag="ים">🌊 ים</button>
+        <button class="tag-chip" type="button" data-tag="אטרקציה">🎢 אטרקציה</button>
+        <button class="tag-chip" type="button" data-tag="תרבות">🏛️ תרבות</button>
+        <button class="tag-chip" type="button" data-tag="אוכל">🍽️ אוכל</button>
+        <button class="tag-chip" type="button" data-tag="ספורט">⚽ ספורט</button>
+        <button class="tag-chip" type="button" data-tag="טיסה">✈️ טיסה</button>
+      </div>
+    </div>
   </header>
 
-  <main>
+  <p id="noResults" class="no-results" hidden>😕 לא נמצאו תוצאות תואמות</p>
 
-    <section class="day">
-      <div class="day-date">20/09/2026</div>
-      <div class="day-weekday">יום ראשון · ערב יום כיפור</div>
+  <main class="route">
+
+    <section class="entry" data-city="general">
+      <span class="entry-knot"></span>
+      <div class="entry-head">
+        <span class="entry-icon" aria-hidden="true">🧭</span>
+        <span class="entry-date">מידע כללי</span>
+      </div>
+      <ul class="plan">
+        <li>👨‍👩‍👧‍👦 2 מבוגרים + 3 ילדים</li>
+        <li>🚗 השכרת רכב: Sixt — שדרוג לרכב גדול יותר</li>
+      </ul>
+      <div class="tips-panel">
+        <div class="tips-title">💡 טיפים</div>
+        <ul class="tips-list">
+          <li>שדרוג הרכב שווה את זה בגלל המזוודות, אבל בחלק מהערים קשה מאוד לחנות — הרחובות צרים</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="entry" data-city="lisbon">
+      <span class="entry-knot"></span>
+      <div class="entry-head">
+        <span class="entry-icon" aria-hidden="true">✈️</span>
+        <div>
+          <div class="entry-date">20/09/2026</div>
+          <div class="entry-weekday">יום ראשון · ערב יום כיפור</div>
+        </div>
+      </div>
+      <div class="tags"><span class="tag">✈️ טיסה</span></div>
       <ul class="plan">
         <li>✈️ הגעה לליסבון</li>
         <li>🧳 התארגנות</li>
       </ul>
-      <div class="stay">🏨 Holiday Inn Lisbon · ליסבון</div>
+      <div class="stay">🏨 <a href="https://www.ihg.com/holidayinn/hotels/us/en/lisbon/lispo/hoteldetail" target="_blank" rel="noopener noreferrer">Holiday Inn Lisbon</a> · ליסבון</div>
     </section>
 
-    <section class="day">
-      <div class="day-date">21/09/2026</div>
-      <div class="day-weekday">יום שני · יום כיפור</div>
+    <section class="entry" data-city="algarve">
+      <span class="entry-knot"></span>
+      <div class="entry-head">
+        <span class="entry-icon" aria-hidden="true">🚗</span>
+        <div>
+          <div class="entry-date">21/09/2026</div>
+          <div class="entry-weekday">יום שני · יום כיפור</div>
+        </div>
+      </div>
+      <div class="tags"><span class="tag">🚗 נסיעה</span></div>
       <ul class="plan">
-        <li>🚗 נסיעה מליסבון ל-Algarve</li>
+        <li>🚗 נסיעה מליסבון ל-Algarve (Guia)</li>
       </ul>
-      <div class="stay">🏨 Airbnb Guia · אלגרבה</div>
+      <div class="stay">🏨 <a href="https://www.airbnb.com/rooms/20294820" target="_blank" rel="noopener noreferrer">Airbnb Guia</a> · אלגרבה</div>
     </section>
 
-    <section class="day">
-      <div class="day-date">22/09/2026</div>
-      <div class="day-weekday">יום שלישי</div>
+    <section class="entry" data-city="algarve">
+      <span class="entry-knot"></span>
+      <div class="entry-head">
+        <span class="entry-icon" aria-hidden="true">💦</span>
+        <div>
+          <div class="entry-date">22/09/2026</div>
+          <div class="entry-weekday">יום שלישי</div>
+        </div>
+      </div>
+      <div class="tags"><span class="tag">🎢 אטרקציה</span></div>
       <ul class="plan">
-        <li>💦 Water Park</li>
+        <li>💦 Slide &amp; Splash<span class="note">פארק מגלשות מושלם לילדים</span></li>
       </ul>
-      <div class="suggestion">💡 עדיין מחליטים: AquaShow או Slide &amp; Splash</div>
-      <div class="stay">🏨 Airbnb Guia · אלגרבה</div>
+      <div class="stay">🏨 <a href="https://www.airbnb.com/rooms/20294820" target="_blank" rel="noopener noreferrer">Airbnb Guia</a> · אלגרבה</div>
     </section>
 
-    <section class="day">
-      <div class="day-date">23/09/2026</div>
-      <div class="day-weekday">יום רביעי</div>
+    <section class="entry" data-city="algarve">
+      <span class="entry-knot"></span>
+      <div class="entry-head">
+        <span class="entry-icon" aria-hidden="true">🚤</span>
+        <div>
+          <div class="entry-date">23/09/2026</div>
+          <div class="entry-weekday">יום רביעי</div>
+        </div>
+      </div>
+      <div class="tags"><span class="tag">🌊 ים</span></div>
       <ul class="plan">
-        <li>🚤 5Emotions Algarve — Benagil + Dolphins</li>
-        <li>📍 Lagos (לאחר מכן)</li>
+        <li>🚤 5Emotions Algarve — Benagil + Dolphins<span class="note">סיור דולפינים ומערות</span></li>
+        <li>🌅 Sagres (&quot;End of the World&quot;)<span class="note">הנקודה הדרום-מערבית ביותר של אירופה</span></li>
       </ul>
-      <div class="stay">🏨 Airbnb Guia · אלגרבה</div>
+      <div class="stay">🏨 <a href="https://www.airbnb.com/rooms/20294820" target="_blank" rel="noopener noreferrer">Airbnb Guia</a> · אלגרבה</div>
     </section>
 
-    <section class="day">
-      <div class="day-date">24/09/2026</div>
-      <div class="day-weekday">יום חמישי</div>
+    <section class="entry" data-city="lisbon">
+      <span class="entry-knot"></span>
+      <div class="entry-head">
+        <span class="entry-icon" aria-hidden="true">🏄</span>
+        <div>
+          <div class="entry-date">24/09/2026</div>
+          <div class="entry-weekday">יום חמישי</div>
+        </div>
+      </div>
+      <div class="tags"><span class="tag">🌊 ים</span><span class="tag">⚽ ספורט</span></div>
       <ul class="plan">
-        <li>🏄 09:00 · Surf lesson<span class="note">משוער: סיום גלישה 13:00</span></li>
+        <li>🏄 09:00 · Surf lesson<span class="note">Albufeira Adventure Surf School · משוער: סיום גלישה 13:00 · קבוצה קטנה עם מדריך, כולל חליפת גלישה · תשלום במזומן</span></li>
         <li>🚗 נסיעה ל-Lisbon<span class="note">הגעה משוערת 16:30–17:00 (תלוי בתנועה ובעצירות)</span></li>
-        <li>⚽ 19:45 · Football match<span class="note">Estádio José Alvalade</span></li>
+        <li>⚽ 19:45 · Portugal נגד Wales<span class="note">Estádio José Alvalade · היה לנו מזל, אווירה מדהימה</span></li>
       </ul>
-      <div class="stay">🏨 Holiday Inn Lisbon - Continental · ליסבון</div>
+      <div class="tips-panel">
+        <div class="tips-title">💡 טיפים</div>
+        <ul class="tips-list">
+          <li>כרטיסים למשחק נקנו מראש דרך StubHub</li>
+          <li>המלון קרוב לאצטדיון — 2 תחנות מטרו בלבד</li>
+          <li>כדאי לתכנן יותר זמן בדרום (פארו ואזור הסביבה) — יש עוד פארקי מים כמו Zoomarine ו-Aquashow, אבל בגלל המשחק נסענו צפונה</li>
+        </ul>
+      </div>
+      <div class="stay">🏨 <a href="https://www.ihg.com/holidayinn/hotels/us/en/lisbon/lisbn/hoteldetail" target="_blank" rel="noopener noreferrer">Holiday Inn Lisbon - Continental</a> · ליסבון</div>
     </section>
 
-    <section class="day">
-      <div class="day-date">25/09/2026</div>
-      <div class="day-weekday">יום שישי · ערב סוכות</div>
+    <section class="entry" data-city="porto">
+      <span class="entry-knot"></span>
+      <div class="entry-head">
+        <span class="entry-icon" aria-hidden="true">🛣️</span>
+        <div>
+          <div class="entry-date">25/09/2026</div>
+          <div class="entry-weekday">יום שישי · ערב סוכות</div>
+        </div>
+      </div>
+      <div class="tags"><span class="tag">🚗 נסיעה</span></div>
       <ul class="plan">
         <li>🚗 Road trip: Lisbon → Cabo da Roca → Nazaré → Porto</li>
-        <li>🍫 WOW Chocolate Story (Porto)<span class="note">מוזיאון השוקולד Chocolate Story בתוך WOW</span></li>
       </ul>
-      <div class="stay">🏨 Airbnb Gaia · פורטו</div>
+      <div class="tips-panel">
+        <div class="tips-title">💡 טיפים</div>
+        <ul class="tips-list">
+          <li>חניה צמודה קטנה — עדיף לחנות ברחוב</li>
+          <li>🍝 מסעדה איטלקית מומלצת ליד ה-Airbnb: <a href="https://maps.app.goo.gl/npDtLeCNew4Z5cb29" target="_blank" rel="noopener noreferrer">במפות</a></li>
+        </ul>
+      </div>
+      <div class="stay">🏨 <a href="https://www.airbnb.com/rooms/1187065688087773453" target="_blank" rel="noopener noreferrer">Airbnb Gaia</a> · פורטו</div>
     </section>
 
-    <section class="day">
-      <div class="day-date">26/09/2026</div>
-      <div class="day-weekday">יום שבת · סוכות א׳</div>
+    <section class="entry" data-city="porto">
+      <span class="entry-knot"></span>
+      <div class="entry-head">
+        <span class="entry-icon" aria-hidden="true">🚡</span>
+        <div>
+          <div class="entry-date">26/09/2026</div>
+          <div class="entry-weekday">יום שבת · סוכות א׳</div>
+        </div>
+      </div>
+      <div class="tags"><span class="tag">🎢 אטרקציה</span><span class="tag">🍽️ אוכל</span></div>
       <ul class="plan">
-        <li>🚡 Gaia Cable Car</li>
-        <li>🌍 World of Discoveries (לאחר מכן)</li>
-        <li>🚢 Douro 6 Bridges Cruise (לאחר מכן)</li>
+        <li>🚡 Gaia Cable Car<span class="note">נסיעה נחמדה, לא חובה</span></li>
+        <li>🦕 תערוכת דינוזאורים עם VR (מול World of Discoveries)<span class="note">תערוכה מתחלפת, פשוט היה במול ה-World of Discoveries</span></li>
+        <li>🏛️ World of Discoveries<span class="note">מומלץ מאוד, מסביר על מסעות התגליות של פורטוגל באפריקה ובמזרח הרחוק</span></li>
+        <li>🍫 WOW Chocolate Story (Porto)</li>
       </ul>
-      <div class="stay">🏨 Airbnb Gaia · פורטו</div>
+      <div class="tips-panel">
+        <div class="tips-title">💡 טיפים</div>
+        <ul class="tips-list">
+          <li>כרטיס הלוך-ושוב ברכבל עולה רק 1€ נוסף למשפחה</li>
+          <li>ויתרנו על שיט הדוורו — יום עמוס מדי, והילדים העדיפו שוקולד</li>
+          <li>🍽️ מסעדה משפחתית מומלצת: <a href="https://maps.app.goo.gl/6jaxw6qRmBtvB2Ss5" target="_blank" rel="noopener noreferrer">במפות</a> — תשלום במזומן בלבד</li>
+        </ul>
+      </div>
+      <div class="stay">🏨 <a href="https://www.airbnb.com/rooms/1187065688087773453" target="_blank" rel="noopener noreferrer">Airbnb Gaia</a> · פורטו</div>
     </section>
 
-    <section class="day">
-      <div class="day-date">27/09/2026</div>
-      <div class="day-weekday">יום ראשון · סוכות ב׳</div>
+    <section class="entry" data-city="lisbon">
+      <span class="entry-knot"></span>
+      <div class="entry-head">
+        <span class="entry-icon" aria-hidden="true">🏰</span>
+        <div>
+          <div class="entry-date">27/09/2026</div>
+          <div class="entry-weekday">יום ראשון · סוכות ב׳</div>
+        </div>
+      </div>
+      <div class="tags"><span class="tag">🏛️ תרבות</span><span class="tag">🚗 נסיעה</span></div>
       <ul class="plan">
-        <li>🏰 Almourol Templário</li>
+        <li>🏰 Almourol Templário<span class="note">מיותר — אמור היה להיות פסטיבל ביום שהגענו, אבל הם היו בהפסקה של 3 שעות</span></li>
         <li>🚗 נסיעה ל-Lisbon<span class="note">נסיעה ארוכה: כ-4–4.5 שעות מצטבר</span></li>
       </ul>
-      <div class="stay">🏨 Montebelo Lisbon Downtown Apartments · ליסבון</div>
+      <div class="tips-panel">
+        <div class="tips-title">💡 טיפים</div>
+        <ul class="tips-list">
+          <li>מיקום מעולה, אבל לינת לילה עדיף לחנות רחוק יותר — Estacionamento Areeiro - EMEL (כ-6€) ולא ב-Baixa (כ-30€)</li>
+          <li>הדירה נמצאת ב-Baixa — אזור תיירותי עם המון מסעדות רחוב וחנויות לתיירים</li>
+        </ul>
+      </div>
+      <div class="stay">🏨 <a href="https://montebelohotels.com/montebelo-lisbon-downtown-apartments/pt/home" target="_blank" rel="noopener noreferrer">Montebelo Lisbon Downtown Apartments</a> · ליסבון</div>
     </section>
 
-    <section class="day">
-      <div class="day-date">28/09/2026</div>
-      <div class="day-weekday">יום שני · חול המועד</div>
+    <section class="entry" data-city="lisbon">
+      <span class="entry-knot"></span>
+      <div class="entry-head">
+        <span class="entry-icon" aria-hidden="true">🏛️</span>
+        <div>
+          <div class="entry-date">28/09/2026</div>
+          <div class="entry-weekday">יום שני · חול המועד</div>
+        </div>
+      </div>
+      <div class="tags"><span class="tag">🏛️ תרבות</span><span class="tag">🍽️ אוכל</span></div>
       <ul class="plan">
-        <li>🛍️ Colombo</li>
-        <li>🦅 Benfica Stadium + Museum (לאחר מכן)</li>
+        <li>🏛️ Belém Tower<span class="note">אתר תיירותי של ליסבון</span></li>
+        <li>🗿 Padrão dos Descobrimentos<span class="note">אנדרטת מגלי הארצות של ליסבון</span></li>
+        <li>🍽️ Time Out Market (ארוחת צהריים)<span class="note">מרקט בסגנון שרונה מרקט</span></li>
+        <li>🏛️ Rua Augusta Arch<span class="note">אתר תיירותי, נבנה ביוזמת המלך José I כחלק משיקום ליסבון לאחר רעידת האדמה ב-1755</span></li>
       </ul>
-      <div class="stay">🏨 Montebelo Lisbon Downtown Apartments · ליסבון</div>
+      <div class="stay">🏨 <a href="https://montebelohotels.com/montebelo-lisbon-downtown-apartments/pt/home" target="_blank" rel="noopener noreferrer">Montebelo Lisbon Downtown Apartments</a> · ליסבון</div>
     </section>
 
-    <section class="day">
-      <div class="day-date">29/09/2026</div>
-      <div class="day-weekday">יום שלישי · חול המועד</div>
+    <section class="entry" data-city="lisbon">
+      <span class="entry-knot"></span>
+      <div class="entry-head">
+        <span class="entry-icon" aria-hidden="true">🛍️</span>
+        <div>
+          <div class="entry-date">29/09/2026</div>
+          <div class="entry-weekday">יום שלישי · חול המועד</div>
+        </div>
+      </div>
+      <div class="tags"><span class="tag">🎢 אטרקציה</span><span class="tag">🛍️ קניות</span><span class="tag">⚽ ספורט</span></div>
       <ul class="plan">
-        <li>🐠 Oceanário</li>
-        <li>🔬 Pavilhão do Conhecimento (לאחר מכן)</li>
+        <li>🛍️ <a href="https://www.colombo.pt/en/" target="_blank" rel="noopener noreferrer">Colombo</a> — קניות ומשחקי וידאו<span class="note">קניון ענק עם סופר, פרימרק ושאר החנויות</span></li>
+        <li>⚽ <a href="https://www.slbenfica.pt/en-us/loja/bilhetes/estadio-e-museu" target="_blank" rel="noopener noreferrer">סיור באצטדיון בנפיקה + מוזיאון</a><span class="note">מומלץ לכל אוהבי הכדורגל</span></li>
+        <li>🧗 <a href="https://adventurepark.pt/en/" target="_blank" rel="noopener noreferrer">פארק הרפתקאות (חבלים)</a><span class="note">מומלץ ביותר להוציא מרץ · יש מסלול רגיל (כ-45 דקות) ומסלול אתגרי</span></li>
       </ul>
-      <div class="suggestion">💡 אם נשאר זמן: Parque das Nações waterfront / טיילת</div>
-      <div class="stay">🏨 Montebelo Lisbon Downtown Apartments · ליסבון</div>
+      <div class="stay">🏨 <a href="https://montebelohotels.com/montebelo-lisbon-downtown-apartments/pt/home" target="_blank" rel="noopener noreferrer">Montebelo Lisbon Downtown Apartments</a> · ליסבון</div>
     </section>
 
-    <section class="day">
-      <div class="day-date">30/09/2026</div>
-      <div class="day-weekday">יום רביעי · חול המועד</div>
+    <section class="entry" data-city="lisbon">
+      <span class="entry-knot"></span>
+      <div class="entry-head">
+        <span class="entry-icon" aria-hidden="true">🐠</span>
+        <div>
+          <div class="entry-date">30/09/2026</div>
+          <div class="entry-weekday">יום רביעי · חול המועד</div>
+        </div>
+      </div>
+      <div class="tags"><span class="tag">🎢 אטרקציה</span></div>
       <ul class="plan">
-        <li>🏛️ Belém — Jerónimos Monastery, Padrão dos Descobrimentos, Belém Tower</li>
-        <li>🥐 אוכל — Pastéis de Belém</li>
+        <li>🔬 <a href="https://www.pavconhecimento.pt/en/visit-us/ticketoffice" target="_blank" rel="noopener noreferrer">Pavilhão do Conhecimento — Ciência Viva</a><span class="note">מוזיאון מדע, גרסה קטנה של מוזיאון המדע בחיפה</span></li>
+        <li>🐠 <a href="https://oceanario.pt/en/" target="_blank" rel="noopener noreferrer">Oceanário de Lisboa</a> + רכבל (חבילה משולבת)<span class="note">מוזיאון אוקיינוסים, נחמד מאוד — בסגנון האקווריום בירושלים</span></li>
       </ul>
-      <div class="stay">🏨 Montebelo Lisbon Downtown Apartments · ליסבון</div>
+      <div class="stay">🏨 <a href="https://montebelohotels.com/montebelo-lisbon-downtown-apartments/pt/home" target="_blank" rel="noopener noreferrer">Montebelo Lisbon Downtown Apartments</a> · ליסבון</div>
     </section>
 
-    <section class="day">
-      <div class="day-date">01/10/2026</div>
-      <div class="day-weekday">יום חמישי · חול המועד</div>
+    <section class="entry" data-city="lisbon">
+      <span class="entry-knot"></span>
+      <div class="entry-head">
+        <span class="entry-icon" aria-hidden="true">🏰</span>
+        <div>
+          <div class="entry-date">01/10/2026</div>
+          <div class="entry-weekday">יום חמישי · חול המועד</div>
+        </div>
+      </div>
+      <div class="tags"><span class="tag">🏛️ תרבות</span><span class="tag">🛍️ קניות</span><span class="tag">✈️ טיסה</span></div>
       <ul class="plan">
-        <li>🏘️ הליכה קצרה ב-Alfama<span class="note">Praça da Figueira → Sé → Alfama → Miradouro de Santa Luzia</span></li>
+        <li>🏰 <a href="https://castelodesaojorge.pt/en/" target="_blank" rel="noopener noreferrer">Castelo de São Jorge</a><span class="note">טירה יפה באמצע ליסבון, מספרת קצת על ההיסטוריה של העיר</span></li>
+        <li>🪞 <a href="https://moilisboa.com/" target="_blank" rel="noopener noreferrer">Museu das Ilusões</a><span class="note">אחלה מוזיאון, קליל, יקר מעט ביחס להיצע</span></li>
+        <li>🛍️ אחה"צ ב-<a href="https://www.colombo.pt/en/" target="_blank" rel="noopener noreferrer">Colombo</a> לפני הטיסה</li>
         <li>✈️ טיסה בערב</li>
       </ul>
-      <div class="stay">🏨 Montebelo Lisbon Downtown Apartments · ליסבון</div>
+      <div class="stay">🏨 <a href="https://montebelohotels.com/montebelo-lisbon-downtown-apartments/pt/home" target="_blank" rel="noopener noreferrer">Montebelo Lisbon Downtown Apartments</a> · ליסבון</div>
     </section>
 
   </main>
@@ -142,5 +314,7 @@
   <footer>
     עודכן ידנית מתוך הלוז המלא · דף זה מציג רק את התוכנית הכללית
   </footer>
+
+  <script src="app.js"></script>
 </body>
 </html>
